@@ -8,12 +8,12 @@ function drawApiPokemons() {
     let pokemons = _pokeService.ApiPokemons
     pokemons.forEach(p => {
         let button = `<button class="btn btn-primary" onclick="app.controllers.pokeController.addToTeam('${p.id}')">Capture!</button>`
-        template += p.getCard(button)
+        template += p.BasicTemplate
     })
-    document.querySelector('.poke-characters').innerHTML = template
-    document.getElementById('buttons-people').innerHTML = `
-    <button ${_swService.PreviousPeople ? '' : 'disabled'} onclick="app.controllers.swController.getPeople('${_swService.PreviousPeople}')">Previous</button>
-    <button ${_swService.NextPeople ? '' : 'disabled'} onclick="app.controllers.swController.getPeople('${_swService.NextPeople}')">Next</button>
+    document.querySelector('.allpokemon').innerHTML = template
+    document.getElementById('buttons-pokemon').innerHTML = `
+    <button ${_pokeService.PreviousPokemons ? '' : 'disabled'} onclick="app.controllers.pokeController.getPokemons('${_pokeService.PreviousPokemons}')">Previous</button>
+    <button ${_pokeService.NextPokemons ? '' : 'disabled'} onclick="app.controllers.pokeController.getPokemons('${_pokeService.NextPokemons}')">Next</button>
     `
 }
 function drawMyTeam() {
@@ -23,7 +23,7 @@ function drawMyTeam() {
         let button = `<button class="btn btn-danger" onclick="app.controllers.pokeController.removeFromTeam('${p.id}')">Free Pokémon</button>
         <i onclick="app.controllers.pokeController.showEditForm('${p.id}')" class="fas fa-pencil-alt"></i>
         `
-        template += p.getCard(button)
+        template += p.BasicTemplate
     })
     document.querySelector('.myteam').innerHTML = template
 }
@@ -55,7 +55,6 @@ export default class PokeController {
             description: event.target.description.value
         }
         _pokeService.editPokemon(data)
-
 
     }
 }

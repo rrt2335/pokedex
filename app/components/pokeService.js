@@ -3,26 +3,34 @@ import Pokemon from "../models/pokemon.js"
 
 // Provide controls to GET/POST/PUT/DELETE
 let _pokeAPI = axios.create({
-    baseURL: 'https://pokeapi.co/api/v2/pokemon/'
+    baseURL: 'https://pokeapi.co/api/v2/pokemon'
 })
 
 let _sandbox = axios.create({
     baseURL: ''
 })
 
-//variable controls for Poke
-let _characters = 'characters?limit=50'
-let _offset = 200
-let _apiKey = '53496df3cd682930aa9108759e347171'
-
+// Variable controls for Poke
+let _offset = 20
+let _limit = '?limit=50'
 
 let _state = {
     apiPokemons: [],
+    nextPrevPokemon: {
+        nextUrl: '',
+        previous: ''
+    },
+    activePokemon: {},
     myTeam: []
 }
 
 let _subscribers = {
     apiPokemons: [],
+    nextPrevPokemon: {
+        nextUrl: '',
+        previous: ''
+    },
+    activePokemon: {},
     myTeam: []
 }
 
@@ -35,6 +43,14 @@ function setState(prop, data) {
 export default class PokeService {
     addSubscriber(prop, fn) {
         _subscribers[prop].push(fn)
+    }
+
+    get NextPokemons() {
+        return _state.nextPrevPokemons.nextUrl
+    }
+
+    get PreviousPokemons() {
+        return _state.nextPrevPokemons.previousUrl
     }
 
     get ApiPokemons() {
@@ -80,10 +96,17 @@ export default class PokeService {
     }
     // Get Poke Data
     getPokeData() {
-        _pokeAPI.get(`${_characters}&offset=${_offset}&apikey=${_apiKey}`)
+        _pokeAPI.get(`${_limit}&offset=${_offset}`)
             .then(res => {
-                let data = res.data.data.results.map(d => new Pokemon(d))
+                console.log(res)
+                let data = res.data.results.map(d => new Pokemon(d))
+                let nextPrev = {
+                    nextUrl: res.data.next,
+        previous: res.data.previous
+                }
                 setState('apiPokemons', data)
+                setState('nextPrevPokemon', nextPrev)
+
             })
             .catch(err => {
                 console.error(err)
