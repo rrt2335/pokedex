@@ -1,5 +1,4 @@
-
-
+import PokeController from "./components/pokeController.js"
 
 class App {
     constructor() {
