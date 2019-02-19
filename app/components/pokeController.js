@@ -47,6 +47,9 @@ export default class PokeController {
     showEditForm(id) {
         document.getElementById(id).hidden = false;
     }
+    getPokemons(url) {
+        _pokeService.getAllApiPokemons(url)
+    }
 
     editPokemon(event) {
         event.preventDefault();

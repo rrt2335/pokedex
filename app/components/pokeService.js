@@ -11,14 +11,14 @@ let _sandbox = axios.create({
 })
 
 // Variable controls for Poke
-let _offset = 20
-let _limit = '?limit=50'
+let _offset = 0
+let _limit = '?limit=20'
 
 let _state = {
     apiPokemons: [],
     nextPrevPokemon: {
         nextUrl: '',
-        previous: ''
+        previousUrl: ''
     },
     activePokemon: {},
     myTeam: []
@@ -28,7 +28,7 @@ let _subscribers = {
     apiPokemons: [],
     nextPrevPokemon: {
         nextUrl: '',
-        previous: ''
+        previousUrl: ''
     },
     activePokemon: {},
     myTeam: []
@@ -46,11 +46,11 @@ export default class PokeService {
     }
 
     get NextPokemons() {
-        return _state.nextPrevPokemons.nextUrl
+        return _state.nextPrevPokemon.nextUrl
     }
 
     get PreviousPokemons() {
-        return _state.nextPrevPokemons.previousUrl
+        return _state.nextPrevPokemon.previousUrl
     }
 
     get ApiPokemons() {
@@ -62,6 +62,8 @@ export default class PokeService {
     }
 
     // Post data
+
+    
     addToTeam(d) {
         // Find specific Pokémon
         let pokemon = _state.apiPokemons.find(pokemon => pokemon.id == id)
