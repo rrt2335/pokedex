@@ -6,10 +6,14 @@ function drawPokemonApi() {
     let template = ''
     _ps.PokemonsApi.forEach(p => {
         template += `
-        <li onclick="app.controllers.pokeController.getDetails('${p.url}')>${p.name}</li>
+        <li onclick="app.controllers.pokeController.getDetails('${p.url}')">${p.name}</li>
         `
     })
-    document.querySelector('#api-pokemon').innerHTML = template;
+     document.querySelector('#api-pokemon').innerHTML = template;
+     document.querySelector('#buttons').innerHTML = `
+     <button onclick = "app.controllers.pokeController.getDetails()">Previous</li>
+     <button onclick = "app.controllers.pokeController.getDetails()">Next</li>
+     `
 }
 
 export default class PokeController {
