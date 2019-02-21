@@ -40,8 +40,8 @@ export default class PokeController {
         _pokeService.addSubscriber('myTeam', drawMyTeam)
 
         //Initialize Data
-        _pokeService.getPokeData()
-        _pokeService.getMyTeamData()
+        // _pokeService.getPokeData()
+        // _pokeService.getMyTeamData()
     }
     
     getPokemons(url) {

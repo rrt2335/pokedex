@@ -63,7 +63,7 @@ export default class PokeService {
 
     // Post data
 
-    
+
     addToTeam(d) {
         // Find specific Pokémon
         let pokemon = _state.apiPokemons.find(pokemon => pokemon.id == id)
@@ -97,18 +97,19 @@ export default class PokeService {
             })
     }
     // Get Poke Data
-    getPokeData() {
-        _pokeAPI.get(`${_limit}&offset=${_offset}`)
-            .then(res => {
-                console.log(res)
-                let data = res.data.results.map(d => new Pokemon(d))
-                let nextPrev = {
-                    nextUrl: res.data.next,
-        previous: res.data.previous
+    // Make a call to Poke api to get all pokemon
+    getAllApiPokemons(url = '') {
+        _pokemonsApi.get(url)
+            // Happens after data comes back
+            .then(response => {
+                // All axios requests return 'data' in the response
+                let pokemons = response.data.results.map(p => new Pokemon(p))
+                let urlData = {
+                    nextUrl: response.data.next,
+                    previousUrl: response.data.previous
                 }
-                setState('apiPokemons', data)
-                setState('nextPrevPokemon', nextPrev)
-
+                setState('nextPrevPokemons', urlData)
+                setState('pokemons', pokemons)
             })
             .catch(err => {
                 console.error(err)
