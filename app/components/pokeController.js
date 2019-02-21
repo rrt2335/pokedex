@@ -1,72 +1,29 @@
-// Private
 import PokeService from "./pokeService.js";
 
-let _pokeService = new PokeService()
+let _ps = new PokeService()
 
-function drawApiPokemons() {
+function drawPokemonApi() {
     let template = ''
-    let pokemons = _pokeService.ApiPokemons
-    pokemons.forEach(p => {
-        let button = `<button class="btn btn-primary" onclick="app.controllers.pokeController.addToTeam('${p.id}')">Capture!</button>`
-        template += p.BasicTemplate
-    })
-    document.querySelector('.allpokemon').innerHTML = template
-    document.getElementById('buttons-pokemon').innerHTML = `
-    <button ${_pokeService.PreviousPokemons ? '' : 'disabled'} onclick="app.controllers.pokeController.getPokemons('${_pokeService.PreviousPokemons}')">Previous</button>
-    <button ${_pokeService.NextPokemons ? '' : 'disabled'} onclick="app.controllers.pokeController.getPokemons('${_pokeService.NextPokemons}')">Next</button>
-    `
-}
-
-function drawMyTeam() {
-    let template = ''
-    let pokemons = _pokeService.MyTeam
-    pokemons.forEach(p => {
-        let button = `<button class="btn btn-danger" onclick="app.controllers.pokeController.removeFromTeam('${p.id}')">Free Pokémon</button>
-        <i onclick="app.controllers.pokeController.showEditForm('${p.id}')" class="fas fa-pencil-alt"></i>
+    _ps.PokemonsApi.forEach(p => {
+        template += `
+        <li onclick="app.controllers.pokeController.getDetails('${p.url}')>${p.name}</li>
         `
-        template += p.BasicTemplate
     })
-    document.querySelector('.myteam').innerHTML = template
+    document.querySelector('#api-pokemon').innerHTML = template;
 }
 
-function drawActivePokemon() {
-     document.getElementById('active-pokemon').innerHTML = _pokeService.ActivePokemon.DetailedTemplate
-}
-
-// Public
 export default class PokeController {
     constructor() {
-        _pokeService.addSubscriber('apiPokemons', drawApiPokemons)
-        _pokeService.addSubscriber('myTeam', drawMyTeam)
-
-        //Initialize Data
-        _pokeService.getPokeData()
-        // _pokeService.getMyTeamData()
-   } 
+        _ps.addSubscriber('pokemonsApi', drawPokemonApi)
+        _ps.getPokemonData()
+    }
     
-    getPokemons(url) {
-        _pokeService.getAllApiPokemons(url)
+    getDetails(url) {
+        _ps.getDetails(url)
     }
 
-    addToTeam(id) {
-        _pokeService.addToTeam(id)
+    showDetails(id) {
+        _ps.showDetails(id)
     }
 
-    removeFromTeam(id) {
-        _pokeService.removeFromTeam(id)
-    }
-
-    showEditForm(id) {
-        document.getElementById(id).hidden = false;
-    }
-
-    editPokemon(event) {
-        event.preventDefault();
-        let data = {
-            id: event.target.id,
-            description: event.target.description.value
-        }
-        _pokeService.editPokemon(data)
-
-    }
 }
