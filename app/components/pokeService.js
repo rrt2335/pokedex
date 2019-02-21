@@ -6,16 +6,16 @@ let _pokeAPI = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/pokemon'
 })
 
-// let _sandbox = axios.create({
-//     baseURL: ''
-// })
+let _sandbox = axios.create({
+    baseURL: ''
+})
 
 // Variable controls for Poke
 let _offset = 0
 let _limit = '?limit=20'
 
 let _state = {
-    apiPokemons: [],
+    pokemons: [],
     nextPrevPokemon: {
         nextUrl: '',
         previousUrl: ''
@@ -34,6 +34,7 @@ let _subscribers = {
     myTeam: []
 }
 
+// Handles all asynchronous code
 function setState(prop, data) {
     _state[prop] = data
     _subscribers[prop].forEach(fn => fn())
@@ -63,7 +64,7 @@ export default class PokeService {
 
     // Post data
 
-
+    
     addToTeam(d) {
         // Find specific Pokémon
         let pokemon = _state.apiPokemons.find(pokemon => pokemon.id == id)
@@ -71,18 +72,18 @@ export default class PokeService {
         let myPokemon = _state.myTeam.find(p => p.name == pokemon.name)
         // Prevent adding duplicates
         if (myPokemon) {
-            alert('You cannot have duplicate Pokémon.')
+            alert('You cannot have more than one type of Pokémon.')
             return
         }
-        // // Send data to server
-        // // First parameter is appended on baseURL, second parameter is data to send
-        // _sandbox.post('', pokemon)
-        //     .then(res => {
-        //         this.getMyTeamData()
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
+        // Send data to server
+        // First parameter is appended on baseURL, second parameter is data to send
+        _sandbox.post('', pokemon)
+            .then(res => {
+                this.getMyTeamData()
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     // Get data
@@ -97,19 +98,18 @@ export default class PokeService {
             })
     }
     // Get Poke Data
-    // Make a call to Poke api to get all pokemon
-    getAllApiPokemons(url = '') {
-        _pokemonsApi.get(url)
-            // Happens after data comes back
-            .then(response => {
-                // All axios requests return 'data' in the response
-                let pokemons = response.data.results.map(p => new Pokemon(p))
-                let urlData = {
-                    nextUrl: response.data.next,
-                    previousUrl: response.data.previous
+    getPokeData() {
+        _pokeAPI.get(`${_limit}&offset=${_offset}`)
+            .then(res => {
+                console.log(res)
+                let data = res.data.results.map(d => new Pokemon(d))
+                let nextPrev = {
+                    nextUrl: res.data.next,
+                    previousUrl: res.data.previous
                 }
-                setState('nextPrevPokemons', urlData)
-                setState('pokemons', pokemons)
+                setState('apiPokemons', data)
+                setState('nextPrevPokemon', nextPrev)
+
             })
             .catch(err => {
                 console.error(err)

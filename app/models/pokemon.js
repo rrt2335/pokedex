@@ -5,7 +5,7 @@ export default class Pokemon {
     }
 
     get BasicTemplate() {
-        return `<li onclick="app.controllers.pokeController.getPokemons('${this.url}')">${this.name}</li>`
+        return `<li>${this.name}</li>`
     }
 
     get DetailedTemplate() {
