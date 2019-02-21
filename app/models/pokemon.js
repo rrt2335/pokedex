@@ -2,17 +2,16 @@ export default class Pokemon {
     constructor(data) {
         this.id = data.id
         this.name = data.name
-        this.ulr = data.url
+        this.url = data.url
     }
 
     get BasicTemplate() {
-        return `<li onclick="app.controllers.pokeController.getPokemon('${this.url}')" class="${this.id}">${this.name}</li>`
+        return `<li onclick="app.controllers.pokeController.getPokemons('${this.url}')">${this.name}</li>`
     }
 
     get DetailedTemplate() {
         return `
         <h3>${this.name}</h3>
-
         `
     }
 }

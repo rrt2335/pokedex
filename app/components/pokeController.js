@@ -16,6 +16,7 @@ function drawApiPokemons() {
     <button ${_pokeService.NextPokemons ? '' : 'disabled'} onclick="app.controllers.pokeController.getPokemons('${_pokeService.NextPokemons}')">Next</button>
     `
 }
+
 function drawMyTeam() {
     let template = ''
     let pokemons = _pokeService.MyTeam
@@ -28,6 +29,10 @@ function drawMyTeam() {
     document.querySelector('.myteam').innerHTML = template
 }
 
+function drawActivePokemon() {
+     document.getElementById('active-pokemon').innerHTML = _pokeService.ActivePokemon.DetailedTemplate
+}
+
 // Public
 export default class PokeController {
     constructor() {
@@ -38,17 +43,21 @@ export default class PokeController {
         _pokeService.getPokeData()
         _pokeService.getMyTeamData()
     }
+    
+    getPokemons(url) {
+        _pokeService.getAllApiPokemons(url)
+    }
+
     addToTeam(id) {
         _pokeService.addToTeam(id)
     }
+
     removeFromTeam(id) {
         _pokeService.removeFromTeam(id)
     }
+
     showEditForm(id) {
         document.getElementById(id).hidden = false;
-    }
-    getPokemons(url) {
-        _pokeService.getAllApiPokemons(url)
     }
 
     editPokemon(event) {

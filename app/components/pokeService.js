@@ -6,9 +6,9 @@ let _pokeAPI = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/pokemon'
 })
 
-let _sandbox = axios.create({
-    baseURL: ''
-})
+// let _sandbox = axios.create({
+//     baseURL: ''
+// })
 
 // Variable controls for Poke
 let _offset = 0
@@ -71,18 +71,18 @@ export default class PokeService {
         let myPokemon = _state.myTeam.find(p => p.name == pokemon.name)
         // Prevent adding duplicates
         if (myPokemon) {
-            alert('You cannot have more than one type of Pokémon.')
+            alert('You cannot have duplicate Pokémon.')
             return
         }
-        // Send data to server
-        // First parameter is appended on baseURL, second parameter is data to send
-        _sandbox.post('', pokemon)
-            .then(res => {
-                this.getMyTeamData()
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // // Send data to server
+        // // First parameter is appended on baseURL, second parameter is data to send
+        // _sandbox.post('', pokemon)
+        //     .then(res => {
+        //         this.getMyTeamData()
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
     }
 
     // Get data
