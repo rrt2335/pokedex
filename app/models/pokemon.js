@@ -1,6 +1,7 @@
 export default class Pokemon {
     constructor(data) {
         this._id = data._id
+        this.order = data.id
         this.name = data.name
         this.url = data.url
         this.height = data.height
@@ -22,14 +23,15 @@ export default class Pokemon {
 
         return `
         <div class="card">
-        <div class="card-body">
+        <div class="card-body text-center">
+            <p id="order" class="card-text text-muted">${this.order}</p>
             <img src="${spriteImage}">
             <h3 class="card-title">${this.name}</h3>
             <h5 class="card-subtitle mb-2 text-muted">Type: ${listOfTypes}</h5>
             <p class="card-text">Weight: ${this.weight}</p>
             <p class="card-text">Height: ${this.height}</p>
             <p class="card-text">Base Experience: ${this.base_experience} XP</p>
-            <button class="btn btn-danger" onclick="app.controllers.pokeController.addPokemon()">Capture!</button>
+            <button class="btn btn-danger" onclick="app.controllers.pokeController.addPokemon()">I Choose You!</button>
         </div>
         </div>
         `

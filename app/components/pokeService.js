@@ -5,6 +5,7 @@ let _pokeApi = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/pokemon'
 })
 
+
 let _limit = 964;
 let _offset = 0;
 
@@ -75,14 +76,14 @@ export default class PokeService {
     prevPokemon() {
         _pokeApi.get(_state.nextPrevPokemon.prevUrl)
             .then(res => {
-                setState('pokemonsApi', res.data.results)
+                setState('pokemonsApi', res.data.previousUrl)
             })
     }
 
     nextPokemon() {
         _pokeApi.get(_state.nextPrevPokemon.nextUrl)
             .then(res => {
-                setState('pokemonsApi', res.data.results)
+                setState('pokemonsApi', res.data.nextUrl)
             })
     }
 }
