@@ -5,7 +5,7 @@ let _pokeApi = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/pokemon'
 })
 
-let _limit = 964;
+let _limit = 20;
 let _offset = 0;
 
 let _state = {
