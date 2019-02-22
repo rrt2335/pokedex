@@ -11,8 +11,8 @@ function drawPokemonApi() {
     })
     document.querySelector('#api-pokemon').innerHTML = template;
     document.querySelector('#buttons').innerHTML = `
-     <button onclick = "app.controllers.pokeController.prevPokemons()">Previous</li>
-     <button onclick = "app.controllers.pokeController.nextPokemons()">Next</li>
+     <button onclick = "app.controllers.pokeController.prevPokemons()">Previous</button>
+     <button onclick = "app.controllers.pokeController.nextPokemons()">Next</button>
      `
 }
 
