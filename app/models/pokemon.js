@@ -24,7 +24,7 @@ export default class Pokemon {
         return `
         <div class="card">
         <div class="card-body text-center">
-            <p id="order" class="card-text text-muted">${this.order}</p>
+            <p id="order" class="card-text text-muted">#${this.order}</p>
             <img src="${spriteImage}">
             <h3 class="card-title">${this.name}</h3>
             <h5 class="card-subtitle mb-2 text-muted">Type: ${listOfTypes}</h5>
