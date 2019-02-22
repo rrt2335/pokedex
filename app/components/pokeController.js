@@ -11,8 +11,8 @@ function drawPokemonApi() {
     })
     document.querySelector('#api-pokemon').innerHTML = template;
     document.querySelector('#buttons').innerHTML = `
-     <button onclick = "app.controllers.pokeController.prevPokemon()">Previous</li>
-     <button onclick = "app.controllers.pokeController.nextPokemon()">Next</li>
+     <button onclick = "app.controllers.pokeController.prevPokemons()">Previous</li>
+     <button onclick = "app.controllers.pokeController.nextPokemons()">Next</li>
      `
 }
 
@@ -20,10 +20,21 @@ function drawActivePokemon() {
     document.querySelector('#active-pokemon').innerHTML = _ps.ActivePokemon.getTemplate()
 }
 
+function drawMyPokemon() {
+    let template = ''
+    _ps.MyPokemon.forEach(p => {
+        template += `
+        <li onclick="app.controllers.pokeController.showDetails('${p.url}')">${p.name}</li>
+        `
+    })
+    document.querySelector('#my-pokemon').innerHTML = template
+}
+
 export default class PokeController {
     constructor() {
         _ps.addSubscriber('pokemonsApi', drawPokemonApi)
         _ps.addSubscriber('activePokemon', drawActivePokemon)
+        _ps.addSubscriber('myPokemon', drawMyPokemon)
         _ps.getPokemonData()
     }
 
@@ -35,11 +46,15 @@ export default class PokeController {
         _ps.showDetails(id)
     }
 
-    prevPokemon() {
-        _ps.prevPokemon()
+    prevPokemons() {
+        _ps.prevPokemons()
     }
 
-    nextPokemon() {
-        _ps.nextPokemon()
+    nextPokemons() {
+        _ps.nextPokemons()
+    }
+
+    addPokemon() {
+        _ps.addPokemon()
     }
 }

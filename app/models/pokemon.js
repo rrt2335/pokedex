@@ -21,9 +21,6 @@ export default class Pokemon {
         // Get template for images
         let spriteImage = this.sprites.front_default
 
-        // Capitalize first letter in name
-        
-
         return `
         <div class="card">
         <div class="card-body text-center">
@@ -31,9 +28,9 @@ export default class Pokemon {
             <img src="${spriteImage}">
             <h3 class="card-title">${this.name}</h3>
             <h5 class="card-subtitle mb-2 text-muted">Type: ${listOfTypes}</h5>
-            <p class="card-text">Weight: ${Math.ceil(this.weight/4.525)} lbs.</p>
-            <p class="card-text">Height: ${this.height*4} in.</p>
-            <p class="card-text">Base Experience: ${this.base_experience} XP</p>
+            <p class="card-text">Weight: ${Math.ceil(this.weight/4.525)} lbs (${Math.ceil(this.weight/9.8)} kg) </p>
+            <p class="card-text">Height: ${this.height*4} in (${this.height*10.16} cm)</p>
+            <p class="card-text">Base experience: ${this.base_experience} XP</p>
             <button class="btn btn-danger" onclick="app.controllers.pokeController.addPokemon()">I Choose You!</button>
         </div>
         </div>
