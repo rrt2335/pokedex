@@ -21,6 +21,9 @@ export default class Pokemon {
         // Get template for images
         let spriteImage = this.sprites.front_default
 
+        // Capitalize first letter in name
+        
+
         return `
         <div class="card">
         <div class="card-body text-center">
