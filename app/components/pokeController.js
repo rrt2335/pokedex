@@ -9,19 +9,24 @@ function drawPokemonApi() {
         <li onclick="app.controllers.pokeController.getDetails('${p.url}')">${p.name}</li>
         `
     })
-     document.querySelector('#api-pokemon').innerHTML = template;
-     document.querySelector('#buttons').innerHTML = `
-     <button onclick = "app.controllers.pokeController.getDetails()">Previous</li>
-     <button onclick = "app.controllers.pokeController.getDetails()">Next</li>
+    document.querySelector('#api-pokemon').innerHTML = template;
+    document.querySelector('#buttons').innerHTML = `
+     <button onclick = "app.controllers.pokeController.previousPokemon()">Previous</li>
+     <button onclick = "app.controllers.pokeController.nextPokemon()">Next</li>
      `
+}
+
+function drawActivePokemon() {
+    document.querySelector('#active-pokemon').innerHTML = _ps.ActivePokemon.getTemplate()
 }
 
 export default class PokeController {
     constructor() {
         _ps.addSubscriber('pokemonsApi', drawPokemonApi)
+        _ps.addSubscriber('activePokemon', drawActivePokemon)
         _ps.getPokemonData()
     }
-    
+
     getDetails(url) {
         _ps.getDetails(url)
     }
@@ -30,4 +35,11 @@ export default class PokeController {
         _ps.showDetails(id)
     }
 
+    previousPokemon() {
+        _ps.previousPokemon()
+    }
+
+    nextPokemon() {
+        _ps.nextPokemon()
+    }
 }
