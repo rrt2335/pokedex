@@ -12,7 +12,7 @@ let _state = {
     pokemonsApi: [],
     nextPrevPokemon: {
         nextUrl: '',
-        previousUrl: ''
+        prevUrl: ''
     },
     activePokemon: {},
     myPokemon: []
@@ -70,6 +70,13 @@ export default class PokeService {
             _state.myPokemon.push(_state.activePokemon)
             _subscribers.myPokemon.forEach(fn => fn())
         }
+    }
+
+    prevPokemon() {
+        _pokeApi.get(_state.nextPrevPokemon.prevUrl)
+            .then(res => {
+                setState('pokemonsApi', res.data.results)
+            })
     }
 
     nextPokemon() {

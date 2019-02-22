@@ -23,7 +23,7 @@ export default class Pokemon {
         return `
         <div class="card">
         <div class="card-body">
-            <img src=("${spriteImage}")>
+            <img src="${spriteImage}">
             <h3 class="card-title">${this.name}</h3>
             <h5 class="card-subtitle mb-2 text-muted">Type: ${listOfTypes}</h5>
             <p class="card-text">Weight: ${this.weight}</p>

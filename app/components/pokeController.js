@@ -11,7 +11,7 @@ function drawPokemonApi() {
     })
     document.querySelector('#api-pokemon').innerHTML = template;
     document.querySelector('#buttons').innerHTML = `
-     <button onclick = "app.controllers.pokeController.previousPokemon()">Previous</li>
+     <button onclick = "app.controllers.pokeController.prevPokemon()">prev</li>
      <button onclick = "app.controllers.pokeController.nextPokemon()">Next</li>
      `
 }
@@ -35,8 +35,8 @@ export default class PokeController {
         _ps.showDetails(id)
     }
 
-    previousPokemon() {
-        _ps.previousPokemon()
+    prevPokemon() {
+        _ps.prevPokemon()
     }
 
     nextPokemon() {
