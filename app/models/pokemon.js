@@ -1,6 +1,6 @@
 export default class Pokemon {
     constructor(data) {
-        this._id = data._id
+        this._id = data._id || data.id
         this.order = data.id
         this.name = data.name
         this.url = data.url

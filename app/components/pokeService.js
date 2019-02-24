@@ -37,15 +37,15 @@ export default class PokeService {
     }
 
     get PokemonsApi() {
-        return _state.pokemonsApi.map(p => new Pokemon(p))
+        return _state.pokemonsApi.map(p => new Pokemon(p));
     }
 
     get ActivePokemon() {
-        return _state.activePokemon
+        return _state.activePokemon;
     }
 
-    get myPokemon() {
-        return _state.myPokemon.map(p => new Pokemon(p))
+    get MyPokemon() {
+        return _state.myPokemon.map(p => new Pokemon(p));
     }
 
     getPokemonData() {
@@ -58,8 +58,8 @@ export default class PokeService {
     getDetails(url) {
         _pokeApi.get(url)
             .then(res => {
-                let data = new Pokemon(res.data)
-                setState('activePokemon', data)
+                let data = new Pokemon(res.data);
+                setState('activePokemon', data);
             })
     }
 
@@ -74,6 +74,7 @@ export default class PokeService {
             _state.myPokemon.push(_state.activePokemon)
             _subscribers.myPokemon.forEach(fn => fn())
         }
+        
     }
 
     prevPokemons() {
