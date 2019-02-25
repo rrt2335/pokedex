@@ -61,6 +61,8 @@ export default class PokeService {
                 let data = new Pokemon(res.data);
                 setState('activePokemon', data);
             })
+        // Scrolls to the top of the page when Pokemon is selected
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
 
     showDetails(id) {
@@ -74,7 +76,6 @@ export default class PokeService {
             _state.myPokemon.push(_state.activePokemon)
             _subscribers.myPokemon.forEach(fn => fn())
         }
-        
     }
 
     prevPokemons() {
