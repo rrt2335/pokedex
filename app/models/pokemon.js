@@ -2,7 +2,7 @@ export default class Pokemon {
     constructor(data) {
         this._id = data._id || data.id
         this.order = data.id
-        this.name = data.name
+        this.name = data.name[0].toUpperCase() + data.name.substr(1)
         this.url = data.url
         this.height = data.height
         this.weight = data.weight
