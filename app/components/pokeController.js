@@ -11,10 +11,10 @@ function drawPokemonApi() {
         `
     })
     document.querySelector('#api-pokemon').innerHTML = template;
-    document.querySelector('#buttons').innerHTML = `
-     <button onclick="app.controllers.pokeController.prevPokemons()">Previous</button>
-     <button onclick="app.controllers.pokeController.nextPokemons()">Next</button>
-     `
+    // document.querySelector('#buttons').innerHTML = `
+    //  <button onclick="app.controllers.pokeController.prevPokemons()">Previous</button>
+    //  <button onclick="app.controllers.pokeController.nextPokemons()">Next</button>
+    //  `
 }
 
 function drawActivePokemon() {
