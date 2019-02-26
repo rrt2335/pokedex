@@ -20,11 +20,21 @@ export default class Pokemon {
 
         // Get template for images
         let spriteImage = this.sprites.front_default
+
+        // Add zeroes before order number
+        let order = 0;
+        if (this.order < 10) {
+            order = `00${this.order}`
+        } else if (this.order >= 10 && this.order < 100) {
+            order = `0${this.order}`
+        } else {
+            order = `${this.order}`
+        }
         
         return `
         <div class="card">
         <div class="card-body text-center">
-            <p id="order" class="card-text text-muted">#${this.order}</p>
+            <p id="order" class="card-text text-muted">#${order}</p>
             <img src="${spriteImage}">
             <h3 class="card-title">${this.name}</h3>
             <h5 class="card-subtitle mb-2 text-muted">Type: ${listOfTypes}</h5>
