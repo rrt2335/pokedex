@@ -8,3 +8,10 @@ body {
     color: black;
     box-shadow: 0 2px 10px black;
 }
+
+#api-pokemon {
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+}
