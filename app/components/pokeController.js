@@ -5,16 +5,23 @@ let _ps = new PokeService()
 function drawPokemonApi() {
     console.log('Drawing listed Pokémon...');
     let template = ''
+    let count = 1
+
+         let order = ""
     _ps.PokemonsApi.forEach(p => {
+        if (count < 10) {
+            order = `00${count}`
+        } else if (count >= 10 && count < 100) {
+            order = `0${count}`
+        } else {
+            order = `${count}`
+        }
+        count++
         template += `
-        <li onclick="app.controllers.pokeController.getDetails('${p.url}')">${p.name}</li>
-        `
+        <p id="list-item" class="m-1" onclick="app.controllers.pokeController.getDetails('${p.url}')">${order}. ${p.name}</p>
+        `   
     })
     document.querySelector('#api-pokemon').innerHTML = template;
-    // document.querySelector('#buttons').innerHTML = `
-    //  <button onclick="app.controllers.pokeController.prevPokemons()">Previous</button>
-    //  <button onclick="app.controllers.pokeController.nextPokemons()">Next</button>
-    //  `
 }
 
 function drawActivePokemon() {
@@ -27,7 +34,8 @@ function drawMyPokemon() {
     let template = ''
     _ps.MyPokemon.forEach(p => {
         template += `
-        <li onclick="app.controllers.pokeController.showDetails('${p._id}')">${p.name}</li>
+        <li onclick="app.controllers.pokeController.showDetails('${p._id}')">
+        ${p.name}</li>
         `
     })
     document.querySelector('#my-pokemon').innerHTML = template
@@ -62,13 +70,13 @@ export default class PokeController {
     }
 
     // addTodo(event) {
-	// 	event.preventDefault()
-	// 	var form = event.target
-	// 	var todo = {
-	// 		description: form.description.value
-	// 	}
-	// 	_tds.addTodo(todo)
-	// 	// Clears the form
-	// 	form.reset();
-	// }
+    // 	event.preventDefault()
+    // 	var form = event.target
+    // 	var todo = {
+    // 		description: form.description.value
+    // 	}
+    // 	_tds.addTodo(todo)
+    // 	// Clears the form
+    // 	form.reset();
+    // }
 }
